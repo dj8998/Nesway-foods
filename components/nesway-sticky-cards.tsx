@@ -113,4 +113,15 @@ export function NeswayStickyCards() {
                         alt={feature.title}
                         loading="lazy"
                         className="w-full h-64 md:h-80 rounded-lg shadow-lg object-cover"
-                        onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+F
+                        onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found"; }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+}
