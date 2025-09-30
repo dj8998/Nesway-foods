@@ -35,7 +35,7 @@ const features = [
 // --- Custom Hook for Scroll Animation ---
 const useScrollAnimation = () => {
   const [inView, setInView] = useState(false);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const element = ref.current;
@@ -59,7 +59,7 @@ const useScrollAnimation = () => {
     return () => observer.disconnect();
   }, []);
 
-  return [ref, inView];
+  return [ref, inView] as const;
 };
 
 
@@ -124,7 +124,11 @@ export function StickyFeatureSection() {
                         loading="lazy"
                         className="w-full h-auto rounded-lg shadow-lg object-cover"
                         // Simple fallback in case an image fails to load
-                        onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found"; }}
+                        onError={(e) => { 
+                            const target = e.target as HTMLImageElement;
+                            target.onerror = null; 
+                            target.src = "https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found"; 
+                        }}
                     />
                   </div>
                 </div>

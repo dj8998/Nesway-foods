@@ -33,7 +33,7 @@ const neswayFeatures = [
 // --- Custom Hook for Scroll Animation ---
 const useScrollAnimation = () => {
   const [inView, setInView] = useState(false);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const element = ref.current;
@@ -54,7 +54,7 @@ const useScrollAnimation = () => {
     return () => observer.disconnect();
   }, []);
 
-  return [ref, inView];
+  return [ref, inView] as const;
 };
 
 // --- Header Component ---
@@ -113,7 +113,11 @@ export function NeswayStickyCards() {
                         alt={feature.title}
                         loading="lazy"
                         className="w-full h-64 md:h-80 rounded-lg shadow-lg object-cover"
-                        onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found"; }}
+                        onError={(e) => { 
+                            const target = e.target as HTMLImageElement;
+                            target.onerror = null; 
+                            target.src = "https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found"; 
+                        }}
                     />
                   </div>
                 </div>
